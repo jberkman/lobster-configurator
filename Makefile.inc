@@ -28,7 +28,8 @@ dist_noinst_DATA +=				\
 	intltool-merge.in			\
 	intltool-update.in			\
 	lobster-configurator.glade		\
-	lobster-configurator.gladep
+	lobster-configurator.gladep		\
+	lobster-configurator.spec
 
 DISTCLEANFILES =				\
 	intltool-extract			\

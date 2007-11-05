@@ -61,6 +61,15 @@ include Makefile.inc
 
 @INTLTOOL_DESKTOP_RULE@
 
+rpm: dist-gzip
+	rpmbuild -tb $(distdir).tar.gz
+
+srpm: dist-gzip
+	rpmbuild -ts $(distdir).tar.gz
+
+rpms: dist-gzip
+	rpmbuild -ta $(distdir).tar.gz
+
 update-makefiles:
 	@for dir in $(include_subdirs) ; do \
 		echo " cp $(top_srcdir)/Makefile.am.subdir $(top_srcdir)/$$dir/Makefile.am" ; \

@@ -12,6 +12,7 @@ G_END_DECLS
 
 #include <glib/ghash.h>
 #include <glib/gerror.h>
+#include <glib/gmain.h>
 #include <gtk/gtkwidget.h>
 
 G_BEGIN_DECLS
@@ -87,6 +88,10 @@ char *lobster_text_view_text (const char *name);
 #define ISTOGGLED(w) (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WIDGET (w))))
 #define ENABLED(w, v) (gtk_widget_set_sensitive (WIDGET (w), (v)))
 #define STARTSWITH(s1,s2) (0 == strncmp (s1, s2, strlen (s2)))
+
+#ifndef g_timeout_add_seconds
+#define g_timeout_add_seconds(interval,function,data) g_timeout_add((interval)*1000,(function),(data))
+#endif
 
 G_END_DECLS
 
