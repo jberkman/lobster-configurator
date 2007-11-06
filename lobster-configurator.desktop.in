@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Categories=GNOME;GTK;System;Settings;
+Exec=lobster-configurator
+Icon=gnome-fs-network
+OnlyShowIn=GNOME;
+StartupNotify=true
+Terminal=false
+TryExec=lobster-configurator
+Type=Application
+_Comment=Configure network connections
+_GenericName=Network
+_Name=Network

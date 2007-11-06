@@ -22,11 +22,14 @@ lobster_configurator_CFLAGS :=				       \
 
 lobster_configurator_LDADD := $(PACKAGE_LIBS) $(INTLLIBS)
 
+apps_DATA += lobster-configurator.desktop
+
 dist_noinst_DATA +=				\
 	autogen.sh				\
 	intltool-extract.in			\
 	intltool-merge.in			\
 	intltool-update.in			\
+	lobster-configurator.desktop.in		\
 	lobster-configurator.glade		\
 	lobster-configurator.gladep		\
 	lobster-configurator.spec

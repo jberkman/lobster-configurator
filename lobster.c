@@ -164,11 +164,16 @@ static gboolean
 read_routes (const char *file, int line_no, char *line, gpointer data, GError **error)
 {
     char *eol;
-    g_free (lobster.router);
-    eol = strchr (line, ' ');
-    if (eol) {
-        *eol = '\0';
+    if (STARTSWITH (line, "default ")) {
+        line = strchr (line, ' ') + 1;
+        eol = strchr (line, ' ');
+        if (eol) {
+            *eol = '\0';
+        }
+    } else if (strchr (line, ' ')) {
+        return TRUE;
     }
+    g_free (lobster.router);
     lobster.router = g_strdup (line);
     return TRUE;
 }
@@ -176,7 +181,16 @@ read_routes (const char *file, int line_no, char *line, gpointer data, GError **
 static char *
 write_routes (const char *file, int line_no, char *line, gpointer data, GError **error)
 {
-    return g_strdup (line ? "" : lobster.router);
+    gboolean *written = data;
+    if (!line) {
+        if (*written) {
+            return g_strdup ("");
+        }
+    } else if (!STARTSWITH (line, "default ") || strchr (line, ' ')) {
+        return line;
+    }
+    *written = TRUE;
+    return g_strdup_printf ("default %s", lobster.router);
 }
 
 gboolean
@@ -278,6 +292,7 @@ lobster_system_save (GError **error)
 {
     GList *li;
     gboolean written_nm = FALSE;
+    gboolean written_routes = FALSE;
 
     /* lobster.interfaces */
     for (li = lobster.interfaces; li; li = li->next) {
@@ -288,7 +303,7 @@ lobster_system_save (GError **error)
 
     if (!lobster.dirty) {
         fprintf (stderr, "system not dirty\n");
-        return TRUE;
+        goto apply_settings;
     }
 
     /* lobster.dns_servers */
@@ -301,7 +316,7 @@ lobster_system_save (GError **error)
     /* lobster.router */
     g_free (lobster.router);
     lobster.router = g_strdup (gtk_entry_get_text (GTK_ENTRY (WIDGET ("router_entry"))));
-    if (!lobster_io_overwrite_file (NETWORK_ROUTES, write_routes, NULL, error)) {
+    if (!lobster_io_overwrite_file (NETWORK_ROUTES, write_routes, &written_routes, error)) {
         return FALSE;
     }
 
@@ -313,6 +328,7 @@ lobster_system_save (GError **error)
 
     lobster.dirty = FALSE;
 
+apply_settings:
     return lobster_system_apply (error);
 }
 

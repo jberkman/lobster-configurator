@@ -42,6 +42,7 @@ main (int argc, char *argv[])
   g_signal_connect (BUFFER ("dns_text"), "changed", G_CALLBACK (on_dns_text_changed), NULL);
 
   lobster_system_display ();
+  gtk_widget_hide (WIDGET ("renew_button"));
   gtk_widget_show (lobster.dialog);
 
   gtk_main ();
