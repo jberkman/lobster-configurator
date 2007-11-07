@@ -198,6 +198,7 @@ lobster_system_load (GError **error)
 {
     GString *servers;
     GList *li;
+    GError *our_err = NULL;
 
     /* lobster.interfaces */
     g_list_foreach (lobster.interfaces, (GFunc)lobster_interface_free, NULL);
@@ -218,8 +219,12 @@ lobster_system_load (GError **error)
     fprintf (stderr, "have nameservers: %s\n", lobster.dns_servers);
 
     /* lobster.router */
-    if (!lobster_io_read_file (NETWORK_ROUTES, read_routes, NULL, error)) {
-        return FALSE;
+    if (!lobster_io_read_file (NETWORK_ROUTES, read_routes, NULL, &our_err)) {
+        if (!g_error_matches (our_err, G_FILE_ERROR, G_FILE_ERROR_NOENT)) {
+            g_propagate_error (error, our_err);
+            return FALSE;
+        }
+        g_error_free (our_err);
     }
 
     fprintf (stderr, "router: %s\n", lobster.router);

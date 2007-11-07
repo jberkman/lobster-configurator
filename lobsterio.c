@@ -75,6 +75,7 @@ gboolean
 lobster_io_overwrite_file (const char *file, LobsterIOWriteFileFunc func, gpointer data, GError **error)
 {
     WriteData wd;
+    GError *our_error = NULL;
     gboolean ret = FALSE;
 
     wd.func = func;
@@ -82,15 +83,22 @@ lobster_io_overwrite_file (const char *file, LobsterIOWriteFileFunc func, gpoint
     wd.buffer = g_string_new (NULL);
     wd.last_was_blank = FALSE;
 
-    if (lobster_io_read_file (file, overwrite_line, &wd, error)) {
-        /* one last line to let writers write any extra data that may
-         * not have been included */
-        if (overwrite_line (file, -1, NULL, &wd, error)) {
-            ret = g_file_set_contents (file, wd.buffer->str, -1, error);
-            fprintf (stderr, "NEW CONTENTS OF %s:\n\n%s\n", file, wd.buffer->str);
-            ret = TRUE;
+    if (!lobster_io_read_file (file, overwrite_line, &wd, &our_error)) {
+        if (!g_error_matches (our_error, G_FILE_ERROR, G_FILE_ERROR_NOENT)) {
+            g_propagate_error (error, our_error);
+            goto free_buffer;
         }
+        g_error_free (our_error);
     }
+
+    /* one last line to let writers write any extra data that may
+     * not have been included */
+    if (overwrite_line (file, -1, NULL, &wd, error)) {
+        ret = g_file_set_contents (file, wd.buffer->str, -1, error);
+        fprintf (stderr, "NEW CONTENTS OF %s:\n\n%s\n", file, wd.buffer->str);
+    }
+
+free_buffer:
     g_string_free (wd.buffer, TRUE);
     return ret;
 }
