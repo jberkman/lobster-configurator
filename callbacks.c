@@ -17,10 +17,10 @@ on_dhcp_toggle_toggled                 (GtkToggleButton *togglebutton,
     ENABLED ("renew_button", enabled);
 
     enabled = GTK_WIDGET_IS_SENSITIVE (togglebutton) && !enabled;
-    EDITABLE ("address_entry", enabled);
-    EDITABLE ("subnet_entry", enabled);
-    EDITABLE ("router_entry", enabled);
-    EDITABLE ("dns_text", enabled);
+    ENABLED ("address_entry", enabled);
+    ENABLED ("subnet_entry", enabled);
+    ENABLED ("router_entry", enabled);
+    ENABLED ("dns_text", enabled);
     lobster_interface_dirty ();
 }
 
@@ -37,7 +37,7 @@ on_nm_toggle_toggled                   (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
     gboolean enabled = !gtk_toggle_button_get_active (togglebutton);
-    ENABLED ("connection_list", enabled);
+    /*ENABLED ("connection_list", enabled);*/
     ENABLED ("enable_toggle", enabled);
     on_enable_toggle_toggled (GTK_TOGGLE_BUTTON (WIDGET ("enable_toggle")), NULL);
     lobster_system_dirty ();
@@ -60,7 +60,7 @@ void
 on_enable_toggle_toggled               (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
-    gboolean enabled = GTK_WIDGET_IS_SENSITIVE (togglebutton) && gtk_toggle_button_get_active (togglebutton);
+    gboolean enabled = ISTOGGLED ("nm_toggle") || gtk_toggle_button_get_active (togglebutton);
     ENABLED ("dhcp_toggle", enabled);
     on_dhcp_toggle_toggled (GTK_TOGGLE_BUTTON (WIDGET ("dhcp_toggle")), NULL);
     /* above dirties interface */
@@ -99,8 +99,14 @@ on_close_button_clicked                (GtkButton       *button,
 {
     GError *error = NULL;
     if (lobster_is_dirty ()) {
-        switch (gtk_dialog_run (GTK_DIALOG (create_changes_dialog ()))) {
+        GtkWidget *dialog = create_changes_dialog ();
+        int res = gtk_dialog_run (GTK_DIALOG (dialog));
+        gtk_widget_destroy (dialog);
+        switch (res) {
         case GTK_RESPONSE_APPLY:
+            if (!lobster_is_valid ()) {
+                return;
+            }
             if (!lobster_system_save (&error)) {
                 lobster_show_error (_("<b>Could not save network configuration:</b>"), error);
                 g_error_free (error);

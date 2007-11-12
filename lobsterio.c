@@ -12,8 +12,14 @@ read_by_line (const char *file, LobsterIOReadFileFunc func, gpointer data, GErro
     char *line_start;
     char *line_end;
     int line_no;
+    GError *our_error = NULL;
 
-    if (!g_file_get_contents (file, &contents, NULL, error)) {
+    if (!g_file_get_contents (file, &contents, NULL, &our_error)) {
+        if (g_error_matches (our_error, G_FILE_ERROR, G_FILE_ERROR_NOENT)) {
+            g_error_free (our_error);
+            return TRUE;
+        }
+        g_propagate_error (error, our_error);
         return FALSE;
     }
 
@@ -75,7 +81,6 @@ gboolean
 lobster_io_overwrite_file (const char *file, LobsterIOWriteFileFunc func, gpointer data, GError **error)
 {
     WriteData wd;
-    GError *our_error = NULL;
     gboolean ret = FALSE;
 
     wd.func = func;
@@ -83,12 +88,8 @@ lobster_io_overwrite_file (const char *file, LobsterIOWriteFileFunc func, gpoint
     wd.buffer = g_string_new (NULL);
     wd.last_was_blank = FALSE;
 
-    if (!lobster_io_read_file (file, overwrite_line, &wd, &our_error)) {
-        if (!g_error_matches (our_error, G_FILE_ERROR, G_FILE_ERROR_NOENT)) {
-            g_propagate_error (error, our_error);
-            goto free_buffer;
-        }
-        g_error_free (our_error);
+    if (!lobster_io_read_file (file, overwrite_line, &wd, error)) {
+        goto free_buffer;
     }
 
     /* one last line to let writers write any extra data that may

@@ -54,6 +54,7 @@ void     lobster_system_display (void);
 void     lobster_system_dirty    (void);
 void     lobster_interface_dirty (void);
 gboolean lobster_is_dirty        (void);
+gboolean lobster_is_valid        (void);
 
 gboolean lobster_interface_load (const char *interface, GError **error);
 gboolean lobster_interface_save (LobsterInterface *iface, GError **error);
@@ -76,6 +77,7 @@ char *lobster_text_view_text (const char *name);
             gtk_text_buffer_set_text (BUFFER (w), (v) ? (v) : "", -1);  \
         }                                                               \
     } G_STMT_END;
+#if 0
 #define EDITABLE(w, v) G_STMT_START {                                   \
         GtkWidget *wid = WIDGET (w);                                    \
         if (GTK_IS_EDITABLE (wid)) {                                    \
@@ -84,9 +86,12 @@ char *lobster_text_view_text (const char *name);
             gtk_text_view_set_editable (GTK_TEXT_VIEW (wid), (v));      \
         }                                                               \
     } G_STMT_END;
+#endif
 #define TOGGLED(w, v) (gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WIDGET (w)), (v)))
 #define ISTOGGLED(w) (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WIDGET (w))))
 #define ENABLED(w, v) (gtk_widget_set_sensitive (WIDGET (w), (v)))
+#define ISENABLED(w) (GTK_WIDGET_IS_SENSITIVE (WIDGET (w)))
+#define VISIBLE(w, v) (((v) ? gtk_widget_show : gtk_widget_hide) (WIDGET (w)))
 #define STARTSWITH(s1,s2) (0 == strncmp (s1, s2, strlen (s2)))
 
 #ifndef g_timeout_add_seconds

@@ -125,6 +125,7 @@ write_dns_servers (const char *file, int line_no, char *line, gpointer data, GEr
             }
         }
         fprintf (stderr, "%s: appending %s\n", file, buf->str);
+        g_strfreev (servers);
         return g_string_free (buf, FALSE);
     } else if (STARTSWITH (line, "nameserver ")) {
         fprintf (stderr, "%s:%d: skipping %s\n", file, line_no, line);
@@ -198,7 +199,6 @@ lobster_system_load (GError **error)
 {
     GString *servers;
     GList *li;
-    GError *our_err = NULL;
 
     /* lobster.interfaces */
     g_list_foreach (lobster.interfaces, (GFunc)lobster_interface_free, NULL);
@@ -219,12 +219,8 @@ lobster_system_load (GError **error)
     fprintf (stderr, "have nameservers: %s\n", lobster.dns_servers);
 
     /* lobster.router */
-    if (!lobster_io_read_file (NETWORK_ROUTES, read_routes, NULL, &our_err)) {
-        if (!g_error_matches (our_err, G_FILE_ERROR, G_FILE_ERROR_NOENT)) {
-            g_propagate_error (error, our_err);
-            return FALSE;
-        }
-        g_error_free (our_err);
+    if (!lobster_io_read_file (NETWORK_ROUTES, read_routes, NULL, error)) {
+        return FALSE;
     }
 
     fprintf (stderr, "router: %s\n", lobster.router);
@@ -371,13 +367,105 @@ lobster_system_display (void)
     lobster_accept_edits ();
 }
 
+static const char *
+valid_octet (const char *s)
+{
+    const char *e;
+    int val = 0;
+    for (e = s; *e && g_ascii_isdigit (*e); e++)
+        if (256 <= (val = val * 10 + (*e - '0')))
+            return NULL;
+    return e == s ? NULL : e;
+}
+
+static gboolean
+valid_ip_string (const char *s)
+{
+    s = valid_octet (s);
+    if (!s || *s != '.') {
+        return FALSE;
+    }
+    s = valid_octet (s+1);
+    if (!s || *s != '.') {
+        return FALSE;
+    }
+    s = valid_octet (s+1);
+    if (!s || *s != '.') {
+        return FALSE;
+    }
+    s = valid_octet (s+1);
+    if (!s || *s != '\0') {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+static void
+set_warning_label (const char *s)
+{
+    if (s) {
+        gtk_label_set_text (GTK_LABEL (WIDGET ("warning_label")), s);
+    }
+    VISIBLE ("warning_icon", s != NULL);
+    VISIBLE ("warning_label", s != NULL);
+}
+
+gboolean
+lobster_is_valid (void)
+{
+    char *s;
+
+    gboolean enabled = FALSE;
+    const char *warning = NULL;
+
+#define CHECK_ENTRY(w, warn) G_STMT_START {                             \
+        if (ISENABLED (w)) {                                            \
+            s = (char *)gtk_entry_get_text (GTK_ENTRY (WIDGET (w)));    \
+            if (!valid_ip_string (s)) {                                 \
+                warning = warn;                                         \
+                goto set_enabled;                                       \
+            }                                                           \
+        }                                                               \
+    } G_STMT_END;
+
+    CHECK_ENTRY ("address_entry", _("The address must be a valid IP address"));
+    CHECK_ENTRY ("subnet_entry",  _("The subnet mask must be a valid ip mask"));
+    CHECK_ENTRY ("router_entry",  _("The router must be a valid IP address"));
+
+#undef CHECK_ENTRY
+
+    if (ISENABLED ("dns_text")) {
+        char **servers;
+        int i;
+
+        s = view_text ("dns_text");
+        servers = g_strsplit_set (s, " \n\t\r,", -1);
+        for (i = 0; servers[i]; i++) {
+            if (servers[i][0] && !valid_ip_string (servers[i])) {
+                warning = _("DNS servers must be valid IP addresses");
+                break;
+            }
+        }
+        g_strfreev (servers);
+        g_free (s);
+    }
+
+    enabled = !warning;
+    
+set_enabled:
+    ENABLED ("network_revert_button", enabled);
+    ENABLED ("network_apply_button", enabled);
+    set_warning_label (warning);
+
+    return enabled;
+}
+
 void
 lobster_system_dirty (void)
 {
     if (!lobster.ignore_edits) {
         lobster.dirty = TRUE;
-        ENABLED ("network_revert_button", TRUE);
-        ENABLED ("network_apply_button", TRUE);
+        lobster_is_valid ();
     } else {
         fprintf (stderr, "ignoring system edit\n");
     }
@@ -390,8 +478,7 @@ lobster_interface_dirty (void)
         LobsterInterface *iface = lobster_interface_get_selected ();
         if (iface) {
             iface->dirty = TRUE;
-            ENABLED ("network_revert_button", TRUE);
-            ENABLED ("network_apply_button", TRUE);
+            lobster_is_valid ();
         }
     } else {
         fprintf (stderr, "ignoring interface edit\n");
@@ -531,30 +618,30 @@ interface_write_func (const char *file, int line_no, char *line, gpointer data, 
         GString *buf = g_string_new (NULL);
 
         if (!iwd->wrote_address) {
-            g_string_append_printf (buf, "IPADDR='%s'\n", iface->dhcp ? "" : iface->address);
+            g_string_append_printf (buf, "IPADDR='%s'\n", (!iface->enabled || iface->dhcp) ? "" : iface->address);
         }
         if (!iwd->wrote_subnet) {
-            g_string_append_printf (buf, "NETMASK='%s'\n", iface->dhcp ? "" : iface->subnet);
+            g_string_append_printf (buf, "NETMASK='%s'\n", (!iface->enabled || iface->dhcp) ? "" : iface->subnet);
         }
         if (!iwd->wrote_enabled) {
             g_string_append_printf (buf, "STARTMODE='%s'\n", iface->enabled ? "auto" : "off");
         }
         if (!iwd->wrote_dhcp) {
-            g_string_append_printf (buf, "BOOTPROTO='%s'\n", iface->dhcp ? "dhcp+autoip" : "static");
+            g_string_append_printf (buf, "BOOTPROTO='%s'\n", (!iface->enabled || iface->dhcp) ? "dhcp+autoip" : "static");
         }
         return g_string_free (buf, FALSE);
     } else if (STARTSWITH (line, "IPADDR=")) {
         iwd->wrote_address = TRUE;
-        return g_strdup_printf ("IPADDR='%s'", iface->dhcp ? "" : iface->address);
+        return g_strdup_printf ("IPADDR='%s'", (!iface->enabled || iface->dhcp) ? "" : iface->address);
     } else if (STARTSWITH (line, "NETMASK=")) {
         iwd->wrote_subnet = TRUE;
-        return g_strdup_printf ("NETMASK='%s'", iface->dhcp ? "" : iface->subnet);
+        return g_strdup_printf ("NETMASK='%s'", (!iface->enabled || iface->dhcp) ? "" : iface->subnet);
     } else if (STARTSWITH (line, "STARTMODE=")) {
         iwd->wrote_enabled = TRUE;
         return g_strdup_printf ("STARTMODE='%s'", iface->enabled ? "auto" : "off");
     } else if (STARTSWITH (line, "BOOTPROTO=")) {
         iwd->wrote_dhcp = TRUE;
-        return g_strdup_printf ("BOOTPROTO='%s'", iface->dhcp ? "dhcp+autoip" : "static");
+        return g_strdup_printf ("BOOTPROTO='%s'", (!iface->enabled || iface->dhcp) ? "dhcp+autoip" : "static");
     }
     return line;
 }
@@ -577,7 +664,7 @@ lobster_interface_save (LobsterInterface *iface, GError **error)
     g_free (iface->subnet);
     iface->subnet = g_strdup (gtk_entry_get_text (GTK_ENTRY (WIDGET ("subnet_entry"))));
 
-    iface->enabled = ISTOGGLED ("enable_toggle");
+    iface->enabled = ISTOGGLED ("nm_toggle") || ISTOGGLED ("enable_toggle");
     iface->dhcp = ISTOGGLED ("dhcp_toggle");
 
     iface->dirty = FALSE;

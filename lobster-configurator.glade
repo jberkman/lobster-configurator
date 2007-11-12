@@ -84,7 +84,7 @@
       <child>
 	<widget class="GtkTable" id="network-table">
 	  <property name="visible">True</property>
-	  <property name="n_rows">8</property>
+	  <property name="n_rows">9</property>
 	  <property name="n_columns">4</property>
 	  <property name="homogeneous">False</property>
 	  <property name="row_spacing">5</property>
@@ -122,7 +122,7 @@
 	    <widget class="GtkCheckButton" id="dhcp-toggle">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="label" translatable="yes">Configure automatically</property>
+	      <property name="label" translatable="yes">Configure using DHCP</property>
 	      <property name="use_underline">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
@@ -165,7 +165,7 @@ Wireless 1</property>
 	    <widget class="GtkCheckButton" id="nm-toggle">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="label" translatable="yes">Use NetworkManager to configure all connections automatically</property>
+	      <property name="label" translatable="yes">Use NetworkManager to control active connections</property>
 	      <property name="use_underline">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
@@ -421,7 +421,7 @@ Wireless 1</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkLabel" id="label6">
+	    <widget class="GtkLabel" id="empty-label">
 	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">
 </property>
@@ -468,6 +468,52 @@ Wireless 1</property>
 	      <property name="top_attach">2</property>
 	      <property name="bottom_attach">3</property>
 	      <property name="y_options"></property>
+	    </packing>
+	  </child>
+
+	  <child>
+	    <widget class="GtkLabel" id="warning-label">
+	      <property name="label" translatable="yes"></property>
+	      <property name="use_underline">False</property>
+	      <property name="use_markup">False</property>
+	      <property name="justify">GTK_JUSTIFY_LEFT</property>
+	      <property name="wrap">False</property>
+	      <property name="selectable">False</property>
+	      <property name="xalign">0</property>
+	      <property name="yalign">0.5</property>
+	      <property name="xpad">0</property>
+	      <property name="ypad">0</property>
+	      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	      <property name="width_chars">-1</property>
+	      <property name="single_line_mode">False</property>
+	      <property name="angle">0</property>
+	    </widget>
+	    <packing>
+	      <property name="left_attach">1</property>
+	      <property name="right_attach">4</property>
+	      <property name="top_attach">8</property>
+	      <property name="bottom_attach">9</property>
+	      <property name="x_options">fill</property>
+	      <property name="y_options"></property>
+	    </packing>
+	  </child>
+
+	  <child>
+	    <widget class="GtkImage" id="warning-icon">
+	      <property name="stock">gtk-dialog-warning</property>
+	      <property name="icon_size">1</property>
+	      <property name="xalign">1</property>
+	      <property name="yalign">0.5</property>
+	      <property name="xpad">0</property>
+	      <property name="ypad">0</property>
+	    </widget>
+	    <packing>
+	      <property name="left_attach">0</property>
+	      <property name="right_attach">1</property>
+	      <property name="top_attach">8</property>
+	      <property name="bottom_attach">9</property>
+	      <property name="x_options">fill</property>
+	      <property name="y_options">fill</property>
 	    </packing>
 	  </child>
 	</widget>
