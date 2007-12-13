@@ -35,7 +35,6 @@ create_network_dialog (void)
   GtkWidget *connection_label;
   GtkWidget *dhcp_toggle;
   GtkWidget *connection_list;
-  GtkWidget *nm_toggle;
   GtkWidget *address_label;
   GtkWidget *address_entry;
   GtkWidget *subnet_label;
@@ -50,6 +49,9 @@ create_network_dialog (void)
   GtkWidget *enable_toggle;
   GtkWidget *warning_label;
   GtkWidget *warning_icon;
+  GtkWidget *nm_hbox;
+  GtkWidget *nm_toggle;
+  GtkWidget *nm_button;
   GtkWidget *network_actions;
   GtkWidget *network_revert_button;
   GtkWidget *network_apply_button;
@@ -96,13 +98,6 @@ create_network_dialog (void)
   gtk_combo_box_append_text (GTK_COMBO_BOX (connection_list), _("Ethernet 1"));
   gtk_combo_box_append_text (GTK_COMBO_BOX (connection_list), _("Wireless"));
   gtk_combo_box_append_text (GTK_COMBO_BOX (connection_list), _("Wireless 1"));
-
-  nm_toggle = gtk_check_button_new_with_mnemonic (_("Use NetworkManager to control active connections"));
-  gtk_widget_set_name (nm_toggle, "nm_toggle");
-  gtk_widget_show (nm_toggle);
-  gtk_table_attach (GTK_TABLE (network_table), nm_toggle, 1, 4, 0, 1,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
 
   address_label = gtk_label_new (_("Address:"));
   gtk_widget_set_name (address_label, "address_label");
@@ -210,6 +205,24 @@ create_network_dialog (void)
                     (GtkAttachOptions) (GTK_FILL), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (warning_icon), 1, 0.5);
 
+  nm_hbox = gtk_hbox_new (FALSE, 5);
+  gtk_widget_set_name (nm_hbox, "nm_hbox");
+  gtk_widget_show (nm_hbox);
+  gtk_table_attach (GTK_TABLE (network_table), nm_hbox, 1, 4, 0, 1,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+
+  nm_toggle = gtk_check_button_new_with_mnemonic (_("Use NetworkManager to control active connections"));
+  gtk_widget_set_name (nm_toggle, "nm_toggle");
+  gtk_widget_show (nm_toggle);
+  gtk_box_pack_start (GTK_BOX (nm_hbox), nm_toggle, TRUE, TRUE, 0);
+
+  nm_button = gtk_button_new_with_mnemonic (_("Configure Network Manager"));
+  gtk_widget_set_name (nm_button, "nm_button");
+  gtk_widget_show (nm_button);
+  gtk_box_pack_start (GTK_BOX (nm_hbox), nm_button, FALSE, FALSE, 0);
+  gtk_widget_set_sensitive (nm_button, FALSE);
+
   network_actions = GTK_DIALOG (network_dialog)->action_area;
   gtk_widget_set_name (network_actions, "network_actions");
   gtk_widget_show (network_actions);
@@ -239,9 +252,6 @@ create_network_dialog (void)
   g_signal_connect ((gpointer) connection_list, "changed",
                     G_CALLBACK (on_connection_list_changed),
                     NULL);
-  g_signal_connect ((gpointer) nm_toggle, "toggled",
-                    G_CALLBACK (on_nm_toggle_toggled),
-                    NULL);
   g_signal_connect ((gpointer) address_entry, "changed",
                     G_CALLBACK (on_address_entry_changed),
                     NULL);
@@ -256,6 +266,12 @@ create_network_dialog (void)
                     NULL);
   g_signal_connect ((gpointer) enable_toggle, "toggled",
                     G_CALLBACK (on_enable_toggle_toggled),
+                    NULL);
+  g_signal_connect ((gpointer) nm_toggle, "toggled",
+                    G_CALLBACK (on_nm_toggle_toggled),
+                    NULL);
+  g_signal_connect ((gpointer) nm_button, "clicked",
+                    G_CALLBACK (on_nm_button_clicked),
                     NULL);
   g_signal_connect ((gpointer) network_revert_button, "clicked",
                     G_CALLBACK (on_revert_button_clicked),
@@ -274,7 +290,6 @@ create_network_dialog (void)
   GLADE_HOOKUP_OBJECT (network_dialog, connection_label, "connection_label");
   GLADE_HOOKUP_OBJECT (network_dialog, dhcp_toggle, "dhcp_toggle");
   GLADE_HOOKUP_OBJECT (network_dialog, connection_list, "connection_list");
-  GLADE_HOOKUP_OBJECT (network_dialog, nm_toggle, "nm_toggle");
   GLADE_HOOKUP_OBJECT (network_dialog, address_label, "address_label");
   GLADE_HOOKUP_OBJECT (network_dialog, address_entry, "address_entry");
   GLADE_HOOKUP_OBJECT (network_dialog, subnet_label, "subnet_label");
@@ -289,6 +304,9 @@ create_network_dialog (void)
   GLADE_HOOKUP_OBJECT (network_dialog, enable_toggle, "enable_toggle");
   GLADE_HOOKUP_OBJECT (network_dialog, warning_label, "warning_label");
   GLADE_HOOKUP_OBJECT (network_dialog, warning_icon, "warning_icon");
+  GLADE_HOOKUP_OBJECT (network_dialog, nm_hbox, "nm_hbox");
+  GLADE_HOOKUP_OBJECT (network_dialog, nm_toggle, "nm_toggle");
+  GLADE_HOOKUP_OBJECT (network_dialog, nm_button, "nm_button");
   GLADE_HOOKUP_OBJECT_NO_REF (network_dialog, network_actions, "network_actions");
   GLADE_HOOKUP_OBJECT (network_dialog, network_revert_button, "network_revert_button");
   GLADE_HOOKUP_OBJECT (network_dialog, network_apply_button, "network_apply_button");
@@ -313,7 +331,6 @@ create_changes_dialog (void)
   changes_dialog = gtk_dialog_new ();
   gtk_widget_set_name (changes_dialog, "changes_dialog");
   gtk_window_set_title (GTK_WINDOW (changes_dialog), _("Network Settings"));
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (changes_dialog), TRUE);
   gtk_window_set_type_hint (GTK_WINDOW (changes_dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 
   changes_vbox = GTK_DIALOG (changes_dialog)->vbox;

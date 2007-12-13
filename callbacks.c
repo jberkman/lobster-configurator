@@ -39,6 +39,7 @@ on_nm_toggle_toggled                   (GtkToggleButton *togglebutton,
     gboolean enabled = !gtk_toggle_button_get_active (togglebutton);
     /*ENABLED ("connection_list", enabled);*/
     ENABLED ("enable_toggle", enabled);
+    ENABLED ("nm_button", !enabled);
     on_enable_toggle_toggled (GTK_TOGGLE_BUTTON (WIDGET ("enable_toggle")), NULL);
     lobster_system_dirty ();
 }
@@ -155,3 +156,18 @@ on_dns_text_changed                    (GtkTextBuffer   *buffer,
 {
     lobster_system_dirty ();
 }
+
+void
+on_nm_button_clicked                   (GtkButton       *button,
+                                        gpointer         user_data)
+{
+    GError *error = NULL;
+
+    gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
+                                      "nm-editor", &error);
+    if (error) {
+        lobster_show_error (_("<b>Could not open Network Manager settings:</b>"), error);
+        g_error_free (error);
+    }
+}
+

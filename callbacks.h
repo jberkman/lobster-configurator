@@ -52,3 +52,7 @@ on_revert_button_clicked               (GtkButton       *button,
 void
 on_apply_button_clicked                (GtkButton       *button,
                                         gpointer         user_data);
+
+void
+on_nm_button_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
