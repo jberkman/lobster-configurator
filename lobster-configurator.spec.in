@@ -1,0 +1,40 @@
+Summary: A network configuration tool
+Name: lobster-configurator
+Version: @VERSION@
+Release: 1
+License: GPL
+Group: System/Tools
+URL: http://code.google.com/p/loolixbodes/wiki/LobsterConfigurator
+Source0: %{name}-%{version}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+
+%description
+Lobster Configurator can configure network interfaces on a SUSE Linux
+system. It can delegate to Network Manager, or let you configure
+devices using dhcp or static addresses.
+
+%prep
+%setup -q
+
+%build
+%configure
+make
+
+%install
+rm -rf $RPM_BUILD_ROOT
+%makeinstall
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+
+%files
+%defattr(-,root,root,-)
+%doc
+%{_bindir}/lobster-configurator
+%{_datadir}/applications/lobster-configurator.desktop
+
+%changelog
+* Mon Nov  5 2007 jacob berkman <jberkman@novell.com>
+- Initial build.
+
