@@ -122,7 +122,7 @@
 	    <widget class="GtkCheckButton" id="dhcp-toggle">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="label" translatable="yes">Configure using DHCP</property>
+	      <property name="label" translatable="yes">Configure automatically</property>
 	      <property name="use_underline">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
@@ -265,7 +265,7 @@ Wireless 1</property>
 	    <widget class="GtkButton" id="renew-button">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="label" translatable="yes">Renew DHCP Lease</property>
+	      <property name="label" translatable="yes">Refresh Connection</property>
 	      <property name="use_underline">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>

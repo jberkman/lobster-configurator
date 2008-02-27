@@ -81,7 +81,7 @@ create_network_dialog (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (connection_label), 1, 0.5);
 
-  dhcp_toggle = gtk_check_button_new_with_mnemonic (_("Configure using DHCP"));
+  dhcp_toggle = gtk_check_button_new_with_mnemonic (_("Configure automatically"));
   gtk_widget_set_name (dhcp_toggle, "dhcp_toggle");
   gtk_widget_show (dhcp_toggle);
   gtk_table_attach (GTK_TABLE (network_table), dhcp_toggle, 1, 3, 3, 4,
@@ -131,7 +131,7 @@ create_network_dialog (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_entry_set_invisible_char (GTK_ENTRY (subnet_entry), 9679);
 
-  renew_button = gtk_button_new_with_mnemonic (_("Renew DHCP Lease"));
+  renew_button = gtk_button_new_with_mnemonic (_("Refresh Connection"));
   gtk_widget_set_name (renew_button, "renew_button");
   gtk_widget_show (renew_button);
   gtk_table_attach (GTK_TABLE (network_table), renew_button, 3, 4, 3, 4,
