@@ -174,8 +174,10 @@ read_routes (const char *file, int line_no, char *line, gpointer data, GError **
     } else if (strchr (line, ' ')) {
         return TRUE;
     }
-    g_free (lobster.router);
-    lobster.router = g_strdup (line);
+    if (*line) {
+        g_free (lobster.router);
+        lobster.router = g_strdup (line);
+    }
     return TRUE;
 }
 
