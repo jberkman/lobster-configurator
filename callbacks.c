@@ -162,12 +162,15 @@ on_nm_button_clicked                   (GtkButton       *button,
                                         gpointer         user_data)
 {
     GError *error = NULL;
+    const char *argv[] = { "/usr/bin/sudo", "-u", NULL, "nm-editor", NULL };
 
-    gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
-                                      "nm-editor", &error);
-    if (error) {
+    argv[2] = g_getenv ("SUDO_USER");
+    if (!gdk_spawn_on_screen (gdk_screen_get_default (),
+                              NULL,
+                              argv[2] ? argv : &argv[3], 
+                              NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL,
+                              &error)) {
         lobster_show_error (_("<b>Could not open Network Manager settings:</b>"), error);
         g_error_free (error);
     }
 }
-
