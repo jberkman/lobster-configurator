@@ -546,7 +546,7 @@ interface_read_func (const char *file, int line_no, char *line, gpointer data, G
     fprintf (stderr, "%s:%d: %s => %d\n", file, line_no, line, type);
     line = strchr (line, '=');
     if (!line) {
-        return;
+        return TRUE;
     }
 
     line++;
