@@ -2,7 +2,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT([lobster-configurator],[0.8],[http://code.google.com/p/loolixbodes/issues/entry])
+AC_INIT([lobster-configurator],[0.9],[http://code.google.com/p/loolixbodes/issues/entry])
 AM_INIT_AUTOMAKE([foreign])
 AC_CONFIG_SRCDIR([main.c])
 AC_CONFIG_HEADER([config.h])

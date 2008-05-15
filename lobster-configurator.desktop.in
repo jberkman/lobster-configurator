@@ -1,6 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
-Categories=GNOME;GTK;System;Settings;
+Categories=GNOME;GTK;Settings;X-SuSE-ControlCenter-System;
 Exec=lobster-configurator
 Icon=gnome-fs-network
 OnlyShowIn=GNOME;
