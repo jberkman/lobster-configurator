@@ -1,0 +1,120 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lobster-configurator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-06-02 19:00-0400\n"
+"PO-Revision-Date: 2008-06-18 17:51\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../main.c:35
+msgid "<b>Could not load network configuration:</b>"
+msgstr "<b>네트워크 구성을 로드할 수 없습니다.</b>"
+
+#: ../interface.c:62 ../interface.c:333 ../interface.c:403 ../interface.c:450
+msgid "Network Settings"
+msgstr "네트워크 설정"
+
+#: ../interface.c:76
+msgid "Connection:"
+msgstr "연결:"
+
+#: ../interface.c:84
+msgid "Configure automatically"
+msgstr "자동으로 구성"
+
+#: ../interface.c:97
+msgid "Ethernet"
+msgstr "이더넷"
+
+#: ../interface.c:98
+msgid "Ethernet 1"
+msgstr "이더넷 1"
+
+#: ../interface.c:99
+msgid "Wireless"
+msgstr "무선"
+
+#: ../interface.c:100
+msgid "Wireless 1"
+msgstr "무선 1"
+
+#: ../interface.c:102
+msgid "Address:"
+msgstr "주소:"
+
+#: ../interface.c:118
+msgid "Subnet Mask:"
+msgstr "서브넷 마스크:"
+
+#: ../interface.c:134
+msgid "Refresh Connection"
+msgstr "연결 새로 고침"
+
+#: ../interface.c:141
+msgid "Router:"
+msgstr "라우터:"
+
+#: ../interface.c:149
+msgid "DNS Servers:"
+msgstr "DNS 서버:"
+
+#: ../interface.c:179
+msgid "\n"
+msgstr "\n"
+
+#: ../interface.c:187
+msgid "Enable connection"
+msgstr "연결 활성화"
+
+#: ../interface.c:215
+msgid "Use NetworkManager to control active connections"
+msgstr "네트워크 관리자를 사용하여 활성 연결 제어"
+
+#: ../interface.c:220
+msgid "Configure Network Manager"
+msgstr "네트워크 관리자 구성"
+
+#: ../interface.c:350
+msgid "Apply changed settings?"
+msgstr "변경된 설정을 적용하시겠습니까?"
+
+#: ../interface.c:361
+msgid "Don't Apply"
+msgstr "적용 안 함"
+
+#: ../interface.c:420
+msgid "Applying changes..."
+msgstr "변경한 내용 적용 중..."
+
+#: ../interface.c:465
+msgid "<b>There was an error doing something:</b>"
+msgstr "<b>작업을 수행하는 동안 오류가 발생했습니다.</b>"
+
+#: ../callbacks.c:54
+msgid "<b>Could not renew DHCP configuration:</b>"
+msgstr "<b>DHCP 구성을 갱신할 수 없습니다.</b>"
+
+#: ../callbacks.c:76
+msgid "<b>Could not load network configuration; configuration may be incomplete:</b>"
+msgstr "<b>네트워크 구성을 로드할 수 없습니다. 구성이 완료되지 않았을 수 있습니다.</b>"
+
+#: ../callbacks.c:89 ../callbacks.c:112
+msgid "<b>Could not save network configuration:</b>"
+msgstr "<b>네트워크 구성을 저장할 수 없습니다.</b>"
+
+#: ../callbacks.c:173
+msgid "<b>Could not open Network Manager settings:</b>"
+msgstr "<b>네트워크 관리자 설정을 열 수 없습니다.</b>"
+
+#: ../support.c:90 ../support.c:114
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr "pixmap 파일 %s을(를) 찾을 수 없습니다."
+

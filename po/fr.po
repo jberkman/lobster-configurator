@@ -1,0 +1,120 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lobster-configurator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-06-02 19:00-0400\n"
+"PO-Revision-Date: 2008-06-18 17:27\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../main.c:35
+msgid "<b>Could not load network configuration:</b>"
+msgstr "<b>Impossible de charger la configuration réseau :</b>"
+
+#: ../interface.c:62 ../interface.c:333 ../interface.c:403 ../interface.c:450
+msgid "Network Settings"
+msgstr "Paramètres réseau"
+
+#: ../interface.c:76
+msgid "Connection:"
+msgstr "Connexion :"
+
+#: ../interface.c:84
+msgid "Configure automatically"
+msgstr "Configurer automatiquement"
+
+#: ../interface.c:97
+msgid "Ethernet"
+msgstr "Ethernet"
+
+#: ../interface.c:98
+msgid "Ethernet 1"
+msgstr "Ethernet 1"
+
+#: ../interface.c:99
+msgid "Wireless"
+msgstr "Sans fil"
+
+#: ../interface.c:100
+msgid "Wireless 1"
+msgstr "Sans fil 1"
+
+#: ../interface.c:102
+msgid "Address:"
+msgstr "Adresse :"
+
+#: ../interface.c:118
+msgid "Subnet Mask:"
+msgstr "Masque de sous-réseau :"
+
+#: ../interface.c:134
+msgid "Refresh Connection"
+msgstr "Rafraîchir la connexion"
+
+#: ../interface.c:141
+msgid "Router:"
+msgstr "Routeur :"
+
+#: ../interface.c:149
+msgid "DNS Servers:"
+msgstr "Serveurs DNS :"
+
+#: ../interface.c:179
+msgid "\n"
+msgstr "\n"
+
+#: ../interface.c:187
+msgid "Enable connection"
+msgstr "Activer la connexion"
+
+#: ../interface.c:215
+msgid "Use NetworkManager to control active connections"
+msgstr "Utiliser le gestionnaire de réseau pour contrôler les connexions actives"
+
+#: ../interface.c:220
+msgid "Configure Network Manager"
+msgstr "Configurer le gestionnaire réseau"
+
+#: ../interface.c:350
+msgid "Apply changed settings?"
+msgstr "Appliquer les modifications ?"
+
+#: ../interface.c:361
+msgid "Don't Apply"
+msgstr "Ne pas appliquer"
+
+#: ../interface.c:420
+msgid "Applying changes..."
+msgstr "Application des modifications..."
+
+#: ../interface.c:465
+msgid "<b>There was an error doing something:</b>"
+msgstr "<b>Une erreur est apparue lors d'un processus :</b>"
+
+#: ../callbacks.c:54
+msgid "<b>Could not renew DHCP configuration:</b>"
+msgstr "<b>Impossible de renouveler la configuration DHCP :</b>"
+
+#: ../callbacks.c:76
+msgid "<b>Could not load network configuration; configuration may be incomplete:</b>"
+msgstr "<b>Impossible de charger la configuration réseau ; il se peut que la configuration soit incomplète :</b>"
+
+#: ../callbacks.c:89 ../callbacks.c:112
+msgid "<b>Could not save network configuration:</b>"
+msgstr "<b>Impossible d'enregistrer la configuration réseau :</b>"
+
+#: ../callbacks.c:173
+msgid "<b>Could not open Network Manager settings:</b>"
+msgstr "<b>Impossible d'ouvrir les paramètres du gestionnaire du réseau :</b>"
+
+#: ../support.c:90 ../support.c:114
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr "Impossible de trouver le fichier pixmap : %s"
+

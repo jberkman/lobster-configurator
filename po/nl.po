@@ -1,0 +1,120 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lobster-configurator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-06-02 19:00-0400\n"
+"PO-Revision-Date: 2008-06-18 17:30\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../main.c:35
+msgid "<b>Could not load network configuration:</b>"
+msgstr "<b>Kan netwerkconfiguratie niet laden:</b>"
+
+#: ../interface.c:62 ../interface.c:333 ../interface.c:403 ../interface.c:450
+msgid "Network Settings"
+msgstr "Netwerkinstellingen"
+
+#: ../interface.c:76
+msgid "Connection:"
+msgstr "Verbinding:"
+
+#: ../interface.c:84
+msgid "Configure automatically"
+msgstr "Automatisch configureren"
+
+#: ../interface.c:97
+msgid "Ethernet"
+msgstr "Ethernet"
+
+#: ../interface.c:98
+msgid "Ethernet 1"
+msgstr "Ethernet 1"
+
+#: ../interface.c:99
+msgid "Wireless"
+msgstr "Draadloos"
+
+#: ../interface.c:100
+msgid "Wireless 1"
+msgstr "Draadloos 1"
+
+#: ../interface.c:102
+msgid "Address:"
+msgstr "Adres:"
+
+#: ../interface.c:118
+msgid "Subnet Mask:"
+msgstr "Subnetmasker:"
+
+#: ../interface.c:134
+msgid "Refresh Connection"
+msgstr "Verbinding vernieuwen"
+
+#: ../interface.c:141
+msgid "Router:"
+msgstr "Router:"
+
+#: ../interface.c:149
+msgid "DNS Servers:"
+msgstr "DNS-servers:"
+
+#: ../interface.c:179
+msgid "\n"
+msgstr "\n"
+
+#: ../interface.c:187
+msgid "Enable connection"
+msgstr "Verbinding inschakelen"
+
+#: ../interface.c:215
+msgid "Use NetworkManager to control active connections"
+msgstr "NetworkManager gebruiken om actieve verbindingen te beheren"
+
+#: ../interface.c:220
+msgid "Configure Network Manager"
+msgstr "Netwerkbeheer configureren"
+
+#: ../interface.c:350
+msgid "Apply changed settings?"
+msgstr "Gewijzigde instellingen toepassen?"
+
+#: ../interface.c:361
+msgid "Don't Apply"
+msgstr "Niet toepassen"
+
+#: ../interface.c:420
+msgid "Applying changes..."
+msgstr "Wijzigingen toepassen..."
+
+#: ../interface.c:465
+msgid "<b>There was an error doing something:</b>"
+msgstr "<b>Er is een fout opgetreden tijdens een bewerking:</b>"
+
+#: ../callbacks.c:54
+msgid "<b>Could not renew DHCP configuration:</b>"
+msgstr "<b>Kan DHCP-configuratie niet vernieuwen:</b>"
+
+#: ../callbacks.c:76
+msgid "<b>Could not load network configuration; configuration may be incomplete:</b>"
+msgstr "<b>Kan netwerkconfiguratie niet laden; configuratie is wellicht onjuist:</b>"
+
+#: ../callbacks.c:89 ../callbacks.c:112
+msgid "<b>Could not save network configuration:</b>"
+msgstr "<b>Kan netwerkconfiguratie niet opslaan:</b>"
+
+#: ../callbacks.c:173
+msgid "<b>Could not open Network Manager settings:</b>"
+msgstr "<b>Kan de instellingen van Netwerkbeheer niet weergeven:</b>"
+
+#: ../support.c:90 ../support.c:114
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr "Kan pixmap-bestand niet vinden: %s"
+

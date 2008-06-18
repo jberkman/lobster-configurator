@@ -1,0 +1,120 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lobster-configurator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-06-02 19:00-0400\n"
+"PO-Revision-Date: 2008-06-18 17:29\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../main.c:35
+msgid "<b>Could not load network configuration:</b>"
+msgstr "<b>ネットワーク環境設定をロードできませんでした:</b>"
+
+#: ../interface.c:62 ../interface.c:333 ../interface.c:403 ../interface.c:450
+msgid "Network Settings"
+msgstr "ネットワーク設定"
+
+#: ../interface.c:76
+msgid "Connection:"
+msgstr "接続:"
+
+#: ../interface.c:84
+msgid "Configure automatically"
+msgstr "自動設定"
+
+#: ../interface.c:97
+msgid "Ethernet"
+msgstr "イーサネット"
+
+#: ../interface.c:98
+msgid "Ethernet 1"
+msgstr "イーサネット1"
+
+#: ../interface.c:99
+msgid "Wireless"
+msgstr "ワイヤレス"
+
+#: ../interface.c:100
+msgid "Wireless 1"
+msgstr "ワイヤレス1"
+
+#: ../interface.c:102
+msgid "Address:"
+msgstr "アドレス:"
+
+#: ../interface.c:118
+msgid "Subnet Mask:"
+msgstr "サブネットマスク:"
+
+#: ../interface.c:134
+msgid "Refresh Connection"
+msgstr "接続をリフレッシュ"
+
+#: ../interface.c:141
+msgid "Router:"
+msgstr "ルータ:"
+
+#: ../interface.c:149
+msgid "DNS Servers:"
+msgstr "DNSサーバ:"
+
+#: ../interface.c:179
+msgid "\n"
+msgstr "\n"
+
+#: ../interface.c:187
+msgid "Enable connection"
+msgstr "接続を有効にする"
+
+#: ../interface.c:215
+msgid "Use NetworkManager to control active connections"
+msgstr "ネットワークマネージャを使用してアクティブな接続を制御"
+
+#: ../interface.c:220
+msgid "Configure Network Manager"
+msgstr "ネットワークマネージャの設定"
+
+#: ../interface.c:350
+msgid "Apply changed settings?"
+msgstr "変更した設定を適用しますか?"
+
+#: ../interface.c:361
+msgid "Don't Apply"
+msgstr "適用しない"
+
+#: ../interface.c:420
+msgid "Applying changes..."
+msgstr "変更を適用しています..."
+
+#: ../interface.c:465
+msgid "<b>There was an error doing something:</b>"
+msgstr "<b>何らかの処理を実行中にエラーが発生しました:</b>"
+
+#: ../callbacks.c:54
+msgid "<b>Could not renew DHCP configuration:</b>"
+msgstr "<b>DHCP設定を更新できませんでした:</b>"
+
+#: ../callbacks.c:76
+msgid "<b>Could not load network configuration; configuration may be incomplete:</b>"
+msgstr "<b>ネットワーク環境設定をロードできませんでした。環境設定が不完全な可能性があります:</b>"
+
+#: ../callbacks.c:89 ../callbacks.c:112
+msgid "<b>Could not save network configuration:</b>"
+msgstr "<b>ネットワーク環境設定を保存できませんでした:</b>"
+
+#: ../callbacks.c:173
+msgid "<b>Could not open Network Manager settings:</b>"
+msgstr "<b>ネットワークマネージャ設定を開けませんでした:</b>"
+
+#: ../support.c:90 ../support.c:114
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr "Pixmapファイルが見つかりませんでした: %s"
+

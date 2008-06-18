@@ -1,0 +1,120 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lobster-configurator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-06-02 19:00-0400\n"
+"PO-Revision-Date: 2008-06-18 17:32\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../main.c:35
+msgid "<b>Could not load network configuration:</b>"
+msgstr "<b>无法装载网络配置：</b>"
+
+#: ../interface.c:62 ../interface.c:333 ../interface.c:403 ../interface.c:450
+msgid "Network Settings"
+msgstr "网络设置"
+
+#: ../interface.c:76
+msgid "Connection:"
+msgstr "连接："
+
+#: ../interface.c:84
+msgid "Configure automatically"
+msgstr "自动配置"
+
+#: ../interface.c:97
+msgid "Ethernet"
+msgstr "以太网"
+
+#: ../interface.c:98
+msgid "Ethernet 1"
+msgstr "以太网 1"
+
+#: ../interface.c:99
+msgid "Wireless"
+msgstr "无线"
+
+#: ../interface.c:100
+msgid "Wireless 1"
+msgstr "无线 1"
+
+#: ../interface.c:102
+msgid "Address:"
+msgstr "地址："
+
+#: ../interface.c:118
+msgid "Subnet Mask:"
+msgstr "子网掩码："
+
+#: ../interface.c:134
+msgid "Refresh Connection"
+msgstr "刷新连接"
+
+#: ../interface.c:141
+msgid "Router:"
+msgstr "路由器："
+
+#: ../interface.c:149
+msgid "DNS Servers:"
+msgstr "DNS 服务器："
+
+#: ../interface.c:179
+msgid "\n"
+msgstr "\n"
+
+#: ../interface.c:187
+msgid "Enable connection"
+msgstr "启用连接"
+
+#: ../interface.c:215
+msgid "Use NetworkManager to control active connections"
+msgstr "使用网络管理器控制活动连接"
+
+#: ../interface.c:220
+msgid "Configure Network Manager"
+msgstr "配置网络管理器"
+
+#: ../interface.c:350
+msgid "Apply changed settings?"
+msgstr "应用更改后的设置吗？"
+
+#: ../interface.c:361
+msgid "Don't Apply"
+msgstr "不应用"
+
+#: ../interface.c:420
+msgid "Applying changes..."
+msgstr "正在应用更改..."
+
+#: ../interface.c:465
+msgid "<b>There was an error doing something:</b>"
+msgstr "<b>执行某些操作时发生错误：</b>"
+
+#: ../callbacks.c:54
+msgid "<b>Could not renew DHCP configuration:</b>"
+msgstr "<b>无法续订 DHCP 配置：</b>"
+
+#: ../callbacks.c:76
+msgid "<b>Could not load network configuration; configuration may be incomplete:</b>"
+msgstr "<b>无法装载网络配置；配置可能未完成：</b>"
+
+#: ../callbacks.c:89 ../callbacks.c:112
+msgid "<b>Could not save network configuration:</b>"
+msgstr "<b>无法保存网络配置：</b>"
+
+#: ../callbacks.c:173
+msgid "<b>Could not open Network Manager settings:</b>"
+msgstr "<b>无法打开网络管理器设置：</b>"
+
+#: ../support.c:90 ../support.c:114
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr "找不到 pixmap 文件：%s"
+
