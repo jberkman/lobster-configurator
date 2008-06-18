@@ -33,6 +33,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc
 %{_bindir}/lobster-configurator
 %{_datadir}/applications/lobster-configurator.desktop
+%{_datadir}/locale/*/LC_MESSAGES/lobster-configurator.mo
 
 %changelog
 * Mon Nov  5 2007 jacob berkman <jberkman@novell.com>
